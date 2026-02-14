@@ -32,3 +32,7 @@ Password: admin
 
 หากต้องการหยุดรันและปิด Container ทั้งหมด:
 astro dev stop
+
+เช็ค apache-airflow-providers-postgres
+astro dev bash --scheduler
+pip list | grep postgres
