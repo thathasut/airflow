@@ -36,3 +36,47 @@ astro dev stop
 เช็ค apache-airflow-providers-postgres
 astro dev bash --scheduler
 pip list | grep postgres
+
+
+การฝัง Tag "parameters" ใน VS Code
+หากคุณใช้ VS Code ให้ทำตามสเต็ปนี้เพื่อให้ Papermill รู้จักช่องรับข้อมูลครับ:
+
+เปิดไฟล์ test_notebook.ipynb ใน VS Code
+
+คลิกที่ Cell แรก ของ Notebook (Cell ที่คุณอยากให้ตัวแปรไปวางไว้)
+
+มองหาปุ่ม Gear (ปุ่มฟันเฟือง) หรือสัญลักษณ์ ... (More Actions) ที่มุมขวาบนของ Cell นั้น
+
+เลือก Add Tag (หรือมองหาช่องที่ให้พิมพ์ Tags)
+
+พิมพ์คำว่า parameters แล้วกด Enter
+
+ต้องเป็นตัวพิมพ์เล็กทั้งหมด และไม่มีเว้นวรรค
+
+Save ไฟล์ Notebook
+
+วิธีตรวจสอบว่า Tag ติดหรือยัง?
+ถ้าคุณหาปุ่มใน UI ไม่เจอ ให้ลองทำวิธี "เปิดไส้ใน" ดูครับ:
+
+คลิกขวาที่ไฟล์ .ipynb ในหน้า Explorer แล้วเลือก Open With... -> Text Editor
+
+กด Ctrl + F ค้นหาคำว่า "tags":
+
+ถ้าถูกต้อง มันควรจะมีหน้าตาประมาณนี้ในไฟล์ JSON:
+
+"metadata": {
+  "tags": [
+   "parameters"
+  ]
+ }
+
+ ทดสอบหลังการแก้
+กลับไปที่ Airflow แล้วกด Trigger DAG อีกครั้ง
+
+ไปดู Log ของ run_analysis คราวนี้คำเตือน WARNING - Input notebook does not contain a cell with tag 'parameters' ต้องหายไป
+
+เปิดไฟล์ out-2026-02-14.ipynb ขึ้นมาดู คุณจะเห็น Cell ใหม่ที่เขียนว่า:
+# Parameters
+execution_date = "2026-02-14"
+run_id = "manual__2026-02-14T..."
+threshold = 100
