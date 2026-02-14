@@ -2,3 +2,4 @@
 apache-airflow-providers-papermill
 papermill
 ipykernel
+apache-airflow-providers-postgres
